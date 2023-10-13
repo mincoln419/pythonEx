@@ -1,0 +1,15 @@
+{
+    "name" : "QR CODE 생성기",
+    "description": "현재 브라우저의 QR코드를 만듧니다.",
+    "version" : "0.0.1",
+    "manifest_version" : 2023,
+    "permissions": [
+        "tabs", "<all_urls>"
+    ],
+    "browser_action" : {
+        "default_popup":"qr.html"
+    },
+    "icons": {
+        "48": "qrcode.png"
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>여러개 마커 표시하기</title>
+    
+</head>
+<body>
+<div id="map" style="width:100%;height:600px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=03c34c4d2828f3bd0ec8180de8fd0ad5"></script>
+<script>
+// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+var bounds = new kakao.maps.LatLngBounds();    
+
+function initMap(datas) {
+    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+    var mapOption = {center: new kakao.maps.LatLng(datas[0].gps[0], datas[0].gps[1]), level: 8}
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+
+    for(var i = 0 ; i < datas.length ; i++) {
+        var filename = datas[i].image;
+        var image_url = "http://127.0.0.1:8080/image/" + filename;
+        var position = new kakao.maps.LatLng(datas[i].gps[0], datas[i].gps[1]);
+        var imageSize = new kakao.maps.Size(80, 50);
+        var markerImage = new kakao.maps.MarkerImage(image_url, imageSize);
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: position,
+            title: filename,
+            image: markerImage
+        });
+
+        bounds.extend(position);
+        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+        kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, image_url));
+    }
+    map.setBounds(bounds);
+}
+
+// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+function makeClickListener(map, marker, url) {
+    return function() {
+        window.open(url, '_blank').focus();
+    };
+}
+
+initMap({{ datas|tojson }});
+</script>
+</body>
+</html>

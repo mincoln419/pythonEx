@@ -1,5 +1,5 @@
 A, B = map(int, input().split())
-
+A -= 1
 
 tmp_A = A
 tmp_B = B

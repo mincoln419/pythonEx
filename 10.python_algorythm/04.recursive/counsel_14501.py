@@ -1,7 +1,6 @@
 import sys;
 input = sys.stdin.readline
 sys.setrecursionlimit(999999)
-import copy
 
 N = int(input())
 arr = [list(map(int, input().split())) for _ in range(N)]

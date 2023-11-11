@@ -1,5 +1,7 @@
 import sys;
 input = sys.stdin.readline
+sys.setrecursionlimit(999999)
+
 
 N = int(input())
 hint = [list(map(int, input().split())) for _ in range(N)]
@@ -7,14 +9,16 @@ hint = [list(map(int, input().split())) for _ in range(N)]
 answer = [0]
 
 def recur(i, target):
-    if target > 998:
-        return
+
     if i == N :
-        if '0' not in str(target) and str(target)[0] != str(target)[1] and str(target)[1] != str(target)[2]:
+        if '0' not in str(target) and str(target)[0] != str(target)[1] and str(target)[1] != str(target)[2] and str(target)[2] != str(target)[0]:
             answer[0] += 1
         recur(0, target + 1)
         return
-     
+    
+    if target > 999:
+        return
+    
     ball_point = 0
     strike_point = 0
     if str(hint[i][0])[0] in str(target) :
@@ -37,7 +41,7 @@ def recur(i, target):
     else :
         recur(0, target + 1)
         
-recur(0, 123)
+recur(0, 100)
 print(*answer)
     
     

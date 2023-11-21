@@ -1,6 +1,5 @@
 import sys;
 input = sys.stdin.readline
-sys.setrecursionlimit(999999)
 
 A = input().strip()
 B = input().strip()
@@ -14,5 +13,5 @@ for y in range(1, len(A) + 1):
         else :
             dp[y][x] = max(dp[y - 1][x], dp[y][x - 1])
 
-print(max(map(max, dp)))
+print(dp[len(B)][len(A)])
     

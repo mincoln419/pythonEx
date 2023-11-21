@@ -7,7 +7,6 @@ B = input().strip()
 
 dp = [[-1] * (len(B) + 1) for _ in range(len(A) + 1)]
 
-       
 def recur(y, x):    
     if y < 0 or x < 0 : 
         return 0

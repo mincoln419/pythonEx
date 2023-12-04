@@ -13,17 +13,20 @@ for u, v, w in arr:
     linkedMap[u].append([v, w]);
     
 q = []
-heapq.heappush(q, (0, K))
+heapq.heappush(q, [0, K])
 dist[K] = 0
 
 while q:   
-    heapq.heapify(q)
     _w, node = heapq.heappop(q)
     
+    if dist[node] < _w:
+        continue
+   
     for nxt, weight in linkedMap[node]:
         if dist[node] + weight < dist[nxt]:
-            dist[nxt] = min(dist[node] + weight, dist[nxt])
-        heapq.heappush(q, (dist[nxt], nxt))
+            dist[nxt] = dist[node] + weight
+            heapq.heappush(q, [dist[nxt], nxt])
+        
         
 for i in range(1, V + 1):
     

@@ -3,7 +3,7 @@ class Solution(object):
 
         memo = {}
         def dfs(n):
-            if n == 1 or n == 2:
+            if n in {1, 2}:
                 memo[n] = n          
             if n not in memo:
                 memo[n] = dfs(n - 1) + dfs(n - 2)
